@@ -1,0 +1,21 @@
+Installing Terraform and Ansible on ChromeOS 
+
+
+Here is the script for Terraform:
+
+# Install and configure Terraform
+# Check for latest release https://releases.hashicorp.com/terraform/
+sudo apt-get install wget git unzip gnupg python3 python3-pip -y
+sudo apt-get update && sudo apt-get upgrade
+sudo wget https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip
+sudo unzip terraform_0.11.18_linux_amd64.zip
+sudo mv terraform /usr/local/bin/
+terraform version
+
+
+Here is script for installation of Ansible:
+
+# Install Ansible
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install ansible
+ansible --version
