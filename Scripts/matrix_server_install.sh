@@ -15,7 +15,7 @@ pip install matrix-synapse
 source ~/synapse/env/bin/activate
 pip install -U matrix-synapse
 cd ~/synapse
-python3.6 -m synapse.app.homeserver \
+python -m synapse.app.homeserver \
   --server-name matrix.vsploit.com \
   --config-path homeserver.yaml \
   --generate-config \
