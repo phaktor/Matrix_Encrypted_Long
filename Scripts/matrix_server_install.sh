@@ -16,7 +16,7 @@ source ~/synapse/env/bin/activate
 pip install -U matrix-synapse
 cd ~/synapse
 python -m synapse.app.homeserver \
-  --server-name matrix.vsploit.com \
+  --server-name matrix.example.com \
   --config-path homeserver.yaml \
   --generate-config \
   --report-stats=no

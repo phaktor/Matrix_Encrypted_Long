@@ -41,7 +41,7 @@ Hello! This repository is intended to setup an encrypted Matrix server environme
         - Then type "sudo certbot renew"
         - Then type:
         python -m synapse.app.homeserver \
-            --server-name matrix.vsploit.com \
+            --server-name matrix.example.com \
             --config-path homeserver.yaml \
             --generate-config \
             --report-stats=no
@@ -64,52 +64,52 @@ Hello! This repository is intended to setup an encrypted Matrix server environme
 ```
         "sudo vi /etc/nginx/conf.d/matrix.conf"
         
-        server {
-            listen 80;
-	        listen [::]:80;
-            server_name matrix.vsploit.com;
-            return 301 https://$host$request_uri;
-            }
+server {
+    listen 80;
+	listen [::]:80;
+    server_name matrix.example.com;
+    return 301 https://$host$request_uri;
+}
 
-        server {
-            listen 443 ssl;
-            listen [::]:443 ssl;
-            server_name matrix.vsploit.com;
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name matrix.example.com;
 
-            ssl on;
-            ssl_certificate /etc/letsencrypt/live/matrix.vsploit.com/fullchain.pem;
-            ssl_certificate_key /etc/letsencrypt/live/matrix.vsploit.com/privkey.pem;
+    ssl on;
+    ssl_certificate /etc/letsencrypt/live/matrix.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/matrix.example.com/privkey.pem;
 
-            location / {
-            proxy_pass http://localhost:8008;
-            proxy_set_header X-Forwarded-For $remote_addr;
-            }
-         }
+    location / {
+        proxy_pass http://localhost:8008;
+        proxy_set_header X-Forwarded-For $remote_addr;
+    }
+}
 
-        server {
-            listen 8448 ssl default_server;
-            listen [::]:8448 ssl default_server;
-            server_name matrix.vsploit.com;
+server {
+    listen 8448 ssl default_server;
+    listen [::]:8448 ssl default_server;
+    server_name matrix.example.com;
             
-            ssl on;
-            ssl_certificate /etc/letsencrypt/live/matrix.vsploit.com/fullchain.pem;
-            ssl_certificate_key /etc/letsencrypt/live/matrix.vsploit.com/privkey.pem;
-            location / {
-            proxy_pass http://localhost:8008;
-            proxy_set_header X-Forwarded-For $remote_addr;
-            }
-        }
+    ssl on;
+    ssl_certificate /etc/letsencrypt/live/matrix.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/matrix.example.com/privkey.pem;
+    location / {
+        proxy_pass http://localhost:8008;
+        proxy_set_header X-Forwarded-For $remote_addr;
+    }
+}
 ```
 
 8) The last manual step is to create a cron job script to renew the Lets Encrypt cert. Add the following text in the script:
 ```
         "sudo vi /etc/cron.daily/letsencrypt-renew"
 
-            #!/bin/sh
-            if certbot renew > /var/log/letsencrypt/renew.log 2>&1 ; then
-                nginx -s reload
-            fi
-            exit
+#!/bin/sh
+if certbot renew > /var/log/letsencrypt/renew.log 2>&1 ; then
+   nginx -s reload
+fi
+exit
         
         "sudo chmod +x /etc/cron.daily/letsencrypt-renew"
         "sudo crontab -e"
@@ -131,7 +131,7 @@ Hello! This repository is intended to setup an encrypted Matrix server environme
 10) Configure admin account.
 11) When logging into the IP address for the first time, make sure you use:
 ```
-https://matrix.vsploit.com
+https://matrix.example.com
 
 ```
 
