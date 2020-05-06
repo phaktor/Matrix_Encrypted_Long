@@ -40,7 +40,7 @@ Hello! This repository is intended to setup an encrypted Matrix server environme
 ```
         - Then type "sudo certbot renew"
         - Then type:
-        python3.6 -m synapse.app.homeserver \
+        python -m synapse.app.homeserver \
             --server-name matrix.vsploit.com \
             --config-path homeserver.yaml \
             --generate-config \
