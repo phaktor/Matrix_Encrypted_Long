@@ -1,3 +1,5 @@
+sudo apt update && sudo apt upgrade
+
 sudo apt-get install build-essential python3-dev libffi-dev \
   python-pip python-setuptools sqlite3 \
   libssl-dev python-virtualenv libjpeg-dev libxslt1-dev
